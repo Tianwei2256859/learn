@@ -13,17 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from polls import urls as polls_urls
 
-from django.http import HttpResponse
-from django.utils import timezone
-def index(request):
-    print request.META
-    ip = request.META.get('REMOTE_ADDR')
-    return HttpResponse("Hello U ip is: {ip}, now is {time}".format(ip=ip, time=timezone.now().strftime('%Y-%m-%d %H:%M:%S')))
+from polls.views import index
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index$', index),
+    url(r'polls/', include(polls_urls))
 ]

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+<div style="width: 80%">
+<p>你好：{{ ip }}</p>
+<p>现在是 {{ now }}</p>
+</div>
+
+{% if  data %}
+    <div style="border:1px solid #000; margin: 0 auto 20px; width: 100%; padding: 20px">
+    {% for k, v in data.items %}
+        {% if k == 'name' %} 你的名字：{{ v }} <br/>{% endif %}
+        {% if k == 'password' %}你的密码：{{ v }} <br/> {% endif %}
+        {% if k == 'like' %}你喜欢：{% for n in v %}{{ n }}     {% endfor %}<br/> {% endif %}
+        {% if k == 'sex' %}你的性别：{{ v }} <br/> {% endif %}
+        {% if k == 'fruit' %}你喜欢的水果：{{ v }} <br/> {% endif %}
+    {% endfor %}
+    </div>
+{% endif %}
+
+<div style="border:1px solid #000; margin: 0 auto 20px; width: 80%; padding: 20px">
+<form method="post">
+    {% csrf_token %}
+    <p>请输入你的消息</p>
+    <p><label for="name">姓名</label>：<input name="name" value=""></p>
+
+    <p><label for="password">密码</label>：<input name="password" value="" type="password"></p>
+
+    <ul>
+        <li>你喜欢女孩<input type="checkbox" name="like" value="girl"></li>
+        <li>你喜欢男孩<input type="checkbox" name="like" value="boy"></li>
+        <li>你喜欢女人<input type="checkbox" name="like" value="woman"></li>
+        <li>你喜欢男人<input type="checkbox" name="like" value="man"></li>
+    </ul>
+
+    <p>你的性别:</p>
+    <p>
+        男：<input type="radio" name="sex" value="男">
+    </p>
+    <p>
+        女：<input type="radio" name="sex" value="女">
+    </p>
+
+    <p>
+        你喜欢吃的水果:
+        <select name="fruit">
+            <option value="苹果">苹果</option>
+            <option value="葡萄">葡萄</option>
+            <option value="梨子">梨子</option>
+        </select>
+    </p>
+
+
+    <input type="submit" value="提交">
+</form>
+</div>
+</body>
+</html>
